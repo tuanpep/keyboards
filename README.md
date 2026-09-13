@@ -2,6 +2,8 @@
 
 Firmware and keymaps for my boards.
 
+**[Visual guide → GUIDE.md](GUIDE.md)**
+
 | Board | Layout | Path |
 | --- | --- | --- |
 | Lily58 | Colemak-DH + QWERTY toggle | [lily58/](lily58/) |
