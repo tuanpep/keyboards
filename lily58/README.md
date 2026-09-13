@@ -1,39 +1,36 @@
-# Lily58 Colemak-DH
+# Lily58
 
-Base layer is **Colemak-DH (matrix)**. A QWERTY layer is included for games.
+Two keymaps:
 
-Keep the **OS keyboard layout on US QWERTY**. The firmware does the remapping.
+| Folder | Base layout |
+| --- | --- |
+| [qmk/](qmk/) and [zmk/](zmk/) | Colemak-DH (QWERTY as a toggle layer) |
+| [qwerty/](qwerty/) | QWERTY only |
 
-## Layout
+Keep the **OS keyboard layout on US QWERTY**. The firmware does any remapping.
 
-```
-ESC   1  2  3  4  5                    6  7  8  9  0  `
-TAB   Q  W  F  P  B                    J  L  U  Y  ;  -
-CTRL  A  R  S  T  G                    M  N  E  I  O  '
-SFT   Z  X  C  D  V   [          ]     K  H  ,  .  /  SFT
-            ALT  GUI  LOWER  SPC    ENT  RAISE  BSPC  GUI
-```
+## QWERTY flash (wired / QMK)
 
-- **Lower:** F-keys + symbols
-- **Raise:** arrows, Home/End/PgUp/PgDn, media
-- **Adjust (QMK, Lower+Raise):** bootloader, Colemak/QWERTY switch
-
-## Flash QMK (wired)
-
-Copy `qmk/` into `qmk_firmware/keyboards/lily58/keymaps/colemak_dh/`.
+Copy `qwerty/qmk/` into `qmk_firmware/keyboards/lily58/keymaps/qwerty/`.
 
 ```
-qmk compile -kb lily58/rev1 -km colemak_dh
-qmk flash   -kb lily58/rev1 -km colemak_dh
+qmk compile -kb lily58/rev1 -km qwerty
+qmk flash   -kb lily58/rev1 -km qwerty
 ```
 
-RP2040: add `-e CONVERT_TO=promicro_rp2040`.
+RP2040 Pro Micro clone:
+
+```
+qmk compile -kb lily58/rev1 -km qwerty -e CONVERT_TO=promicro_rp2040
+qmk flash   -kb lily58/rev1 -km qwerty -e CONVERT_TO=promicro_rp2040
+```
+
 Light PCB: `-kb lily58/light`.
 
-Or import `qmk/keymap.json` at https://config.qmk.fm/#/lily58/rev1/LAYOUT
+Or import `qwerty/qmk/keymap.json` at https://config.qmk.fm/#/lily58/rev1/LAYOUT
 
-Unplug TRRS and flash one half at a time.
+Unplug the TRRS cable and flash one half at a time.
 
-## Flash ZMK (wireless)
+## QWERTY flash (wireless / ZMK)
 
-Replace `config/lily58.keymap` in your zmk-config with `zmk/lily58.keymap`.
+Replace `config/lily58.keymap` in your zmk-config with `qwerty/zmk/lily58.keymap`.
