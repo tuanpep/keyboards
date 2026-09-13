@@ -1,8 +1,8 @@
 # Keyboard firmware guide
 
-Visual flash and layout guide. Keep the **OS layout on US QWERTY** so the firmware is the only remapper.
+Keep the **OS layout on US QWERTY** so the firmware is the only remapper.
 
-Full diagrams: [docs/images/](docs/images/)
+Diagrams: [docs/images/](docs/images/)
 
 ## Boards
 
@@ -11,9 +11,11 @@ Full diagrams: [docs/images/](docs/images/)
 | Lily58 | 58 (6×4 + 4 thumbs) | `lily58/rev1` | [lily58/](lily58/) |
 | Corne v3 (crkbd) | 42 (3×6 + 3 thumbs) | `crkbd/rev1` | [corne/](corne/) |
 
-Corne **v4** is `crkbd/rev4`.
+Lower / Raise / Adjust are **shared** by QWERTY and Colemak-DH on each board.
 
-## Lily58 QWERTY
+---
+
+## Lily58 base — QWERTY
 
 ![Lily58 QWERTY](docs/images/lily58-qwerty.svg)
 
@@ -25,16 +27,7 @@ SFT   Z  X  C  V  B   [          ]     N  M  ,  .  /  SFT
             ALT  GUI  LOWER  SPC    ENT  RAISE  BSPC  GUI
 ```
 
-- **Lower** F-keys + symbols
-- **Raise** arrows / Home End PgUp PgDn / media
-- **Adjust** (Lower+Raise) bootloader
-
-```bash
-qmk flash -kb lily58/rev1 -km qwerty
-qmk flash -kb lily58/rev1 -km qwerty -e CONVERT_TO=promicro_rp2040
-```
-
-## Lily58 Colemak-DH
+## Lily58 base — Colemak-DH
 
 ![Lily58 Colemak-DH](docs/images/lily58-colemak-dh.svg)
 
@@ -46,7 +39,54 @@ SFT   Z  X  C  D  V   [          ]     K  H  ,  .  /  SFT
             ALT  GUI  LOWER  SPC    ENT  RAISE  BSPC  GUI
 ```
 
-## Corne v3 QWERTY
+## Lily58 Lower
+
+![Lily58 Lower](docs/images/lily58-lower.svg)
+
+```
+_     F1 F2 F3 F4 F5                   F6 F7 F8 F9 F10 F11
+_     !  @  #  $  %                    ^  &  *  (  )   F12
+_     `  ~  \  |  .                    .  _  +  {  }   _
+_     _  _  _  _  _   _          _     .  -  =  [  ]   _
+            _    _    LOWER  SPC    ENT  RAISE  _    _
+```
+
+## Lily58 Raise
+
+![Lily58 Raise](docs/images/lily58-raise.svg)
+
+```
+_     _  _  _  _  _                    _    _    _    _    _    _
+_     .  .  .  .  .                    Home PgDn PgUp End  .    _
+_     .  .  .  .  .                    Left Down Up   Rght Del  _
+_     .  .  .  .  .   _          _     Mute Vol- Vol+ Prev Next Play
+            _    _    LOWER  SPC    ENT  RAISE  _    _
+```
+
+## Lily58 Adjust (hold Lower+Raise)
+
+![Lily58 Adjust](docs/images/lily58-adjust.svg)
+
+```
+BOOT  .  .  .  .  .                    .  .  .  .  .  BOOT
+.     QWE .  .  .  .                    .  .  .  .  .  .
+.     CMK .  TG .  .                    .  .  .  .  .  .
+```
+
+- Left **Q** column on Adjust: `QWE` = default QWERTY (`DF_QWE`)
+- Left **A** column on Adjust: `CMK` = default Colemak-DH (`DF_CMK`)
+- `TG` toggles QWERTY layer
+- Outer ESC / ` = bootloader
+
+```bash
+qmk flash -kb lily58/rev1 -km default
+qmk flash -kb lily58/rev1 -km qwerty
+qmk flash -kb lily58/rev1 -km qwerty -e CONVERT_TO=promicro_rp2040
+```
+
+---
+
+## Corne v3 base — QWERTY
 
 ![Corne QWERTY](docs/images/corne-qwerty.svg)
 
@@ -57,12 +97,7 @@ SFT   Z  X  C  V  B          N  M  ,  .  /  SFT
            GUI  LOWER  SPC    ENT  RAISE  ALT
 ```
 
-```bash
-qmk flash -kb crkbd/rev1 -km tuanpep
-qmk flash -kb crkbd/rev1 -km tuanpep -e CONVERT_TO=promicro_rp2040
-```
-
-## Corne v3 Colemak-DH
+## Corne v3 base — Colemak-DH
 
 ![Corne Colemak-DH](docs/images/corne-colemak-dh.svg)
 
@@ -73,7 +108,46 @@ SFT   Z  X  C  D  V          K  H  ,  .  /  SFT
            GUI  LOWER  SPC    ENT  RAISE  ALT
 ```
 
-Hold Lower+Raise, tap left **A** = QWERTY, tap left **Z** = Colemak-DH.
+## Corne Lower
+
+![Corne Lower](docs/images/corne-lower.svg)
+
+```
+ESC   1  2  3  4  5          6  7  8  9  0  BSPC
+_     F1 F2 F3 F4 F5         F6 F7 F8 F9 F10 F11
+_     .  .  .  .  .          .  .  .  .  .  F12
+           _  LOWER  SPC    ENT  RAISE  _
+```
+
+## Corne Raise
+
+![Corne Raise](docs/images/corne-raise.svg)
+
+```
+`     !  @  #  $  %          ^  &  *  (  )  DEL
+_     -  =  [  ]  \          Left Down Up Rght |  ~
+_     _  +  {  }  .          Home PgDn PgUp End Mute Play
+           _  LOWER  SPC    ENT  RAISE  _
+```
+
+## Corne Adjust (hold Lower+Raise)
+
+![Corne Adjust](docs/images/corne-adjust.svg)
+
+```
+BOOT  .  .  .  .  .          .  .  .  .  .  BOOT
+.     QWE .  .  .  .          .  .  .  .  .  .
+.     CMK .  .  .  .          .  .  .  .  .  .
+```
+
+Hold Lower+Raise, tap left **Q** = QWERTY default, tap left **A** = Colemak-DH default.
+
+```bash
+qmk flash -kb crkbd/rev1 -km tuanpep
+qmk flash -kb crkbd/rev1 -km tuanpep -e CONVERT_TO=promicro_rp2040
+```
+
+---
 
 ## Flash rules
 
